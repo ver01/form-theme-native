@@ -1,0 +1,57 @@
+{
+    "name": "@ver01/form-theme-native",
+    "version": "0.0.1",
+    "description": "My Ver01 Form Theme",
+    "scripts": {
+        "build:readme": "toctoc README.md -w",
+        "build:lib": "rimraf lib && cross-env NODE_ENV=production babel -d lib/ src/ && node-sass src/index.scss lib/index.css --importer node_modules/node-sass-import",
+        "cs-check": "prettier '{src,test}/**/*.js'",
+        "cs-format": "prettier '{src,test}/**/*.js' --write",
+        "lint": "eslint src test",
+        "precommit": "lint-staged",
+        "publish-to-npm": "npm run build:readme && npm run build:lib && npm publish",
+        "preversion": "npm run build:lib && npm run build:readme && npm run cs-check && npm run lint"
+    },
+    "lint-staged": {
+        "{src,test}/**/*.js": [
+            "npm run lint",
+            "npm run cs-format",
+            "git add"
+        ]
+    },
+    "main": "lib/index.js",
+    "files": [
+        "lib"
+    ],
+    "engineStrict": false,
+    "engines": {
+        "npm": ">=2.14.7",
+        "node": ">=6"
+    },
+    "peerDependencies": {
+        "react": ">=15"
+    },
+    "dependencies": {},
+    "devDependencies": {
+        "cross-env": "^2.0.1",
+        "react": "^15.5.0",
+        "babel-cli": "^6.18.0",
+        "babel-preset-env": "^1.7.0",
+        "babel-preset-react": "^6.16.0",
+        "node-sass": "^4.11.0",
+        "node-sass-import": "^2.0.1",
+        "babel-plugin-transform-object-rest-spread": "^6.16.0",
+        "babel-plugin-transform-runtime": "^6.23.0",
+        "babel-plugin-transform-class-properties": "^6.18.0",
+        "rimraf": "^2.5.4"
+    },
+    "directories": {
+        "test": "test"
+    },
+    "keywords": [
+        "react",
+        "@ver01/form",
+        "ver01.com"
+    ],
+    "license": "MIT"
+}
